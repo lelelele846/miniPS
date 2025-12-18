@@ -104,7 +104,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
         mGradientMaskFragment = GradientMaskBSFragment()
 
         mStickerBSFragment.setStickerListener(this)
-        // Emoji 功能已合并到贴纸面板，不再单独弹�?        mPropertiesBSFragment.setPropertiesChangeListener(this)
+        // Emoji 功能已合并到贴纸面板，不再单独弹�?        mPropertiesBSFragment.setPropertiesChangeListener(this)
         mShapeBSFragment.setPropertiesChangeListener(this)
         mGradientMaskFragment.setGradientMaskListener(this)
 
@@ -169,7 +169,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     }
     
     /**
-     * 加载媒体文件（支持图片、GIF、WebP、MP4�?     */
+     * 加载媒体文件（支持图片、GIF、WebP、MP4�?     */
     private fun loadMediaFromUri(uri: Uri, imageView: ImageView) {
         val mediaType = MediaLoader.getMediaType(this, uri)
         
@@ -177,20 +177,20 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
             MediaLoader.MediaType.GIF -> {
                 // 使用Glide加载GIF动画
                 MediaLoader.loadGif(this, uri, imageView)
-                // 同时获取第一帧用于编�?                MediaLoader.getBitmapFromUri(this, uri)?.let { bitmap ->
+                // 同时获取第一帧用于编�?                MediaLoader.getBitmapFromUri(this, uri)?.let { bitmap ->
                     mPhotoEditorView.source.setImageBitmap(bitmap)
                 }
                 showSnackbar(getString(R.string.msg_gif_loaded))
             }
             MediaLoader.MediaType.WEBP -> {
-                // 使用Glide加载WebP（支持动画WebP�?                MediaLoader.loadWebP(this, uri, imageView)
-                // 同时获取第一帧用于编�?                MediaLoader.getBitmapFromUri(this, uri)?.let { bitmap ->
+                // 使用Glide加载WebP（支持动画WebP�?                MediaLoader.loadWebP(this, uri, imageView)
+                // 同时获取第一帧用于编�?                MediaLoader.getBitmapFromUri(this, uri)?.let { bitmap ->
                     mPhotoEditorView.source.setImageBitmap(bitmap)
                 }
                 showSnackbar(getString(R.string.msg_webp_loaded))
             }
             MediaLoader.MediaType.VIDEO -> {
-                // 视频需要特殊处理，显示视频预览对话�?                showVideoPreview(uri)
+                // 视频需要特殊处理，显示视频预览对话�?                showVideoPreview(uri)
             }
             MediaLoader.MediaType.IMAGE -> {
                 // 普通图片，使用优化的Glide加载
@@ -266,7 +266,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
         
         // 长按相册图标进入性能测试模式
         imgGallery.setOnLongClickListener {
-            Log.d(TAG, "长按相册图标，显示性能测试对话�?)
+            Log.d(TAG, "长按相册图标，显示性能测试对话�?)
             showPerformanceTestDialog()
             true
         }
@@ -353,7 +353,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
 
             R.id.imgGallery -> {
                 val intent = Intent()
-                // 支持图片和视频格�?                intent.type = "*/*"
+                // 支持图片和视频格�?                intent.type = "*/*"
                 intent.action = Intent.ACTION_GET_CONTENT
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf(
                     "image/*",
@@ -623,7 +623,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
                     mPhotoEditor.saveAsBitmap(saveSettings)
                 }
                 
-                // 保存为临时文�?                val tempFile = File(cacheDir, "crop_temp_${System.currentTimeMillis()}.jpg")
+                // 保存为临时文�?                val tempFile = File(cacheDir, "crop_temp_${System.currentTimeMillis()}.jpg")
                 withContext(Dispatchers.IO) {
                     FileOutputStream(tempFile).use { out ->
                         sourceBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
@@ -682,7 +682,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     }
     
     override fun getCropperParams(): CropperParams {
-        // 返回不约束比例的裁剪参数�?, 0 表示自由比例�?        // 如果需要固定比例，可以返回例如 CropperParams(1, 1) 表示 1:1
+        // 返回不约束比例的裁剪参数�?, 0 表示自由比例�?        // 如果需要固定比例，可以返回例如 CropperParams(1, 1) 表示 1:1
         return CropperParams(0, 0)
     }
     
@@ -719,7 +719,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     
     override fun onCropCancel() {
         Log.d(TAG, "裁剪取消")
-        showSnackbar("裁剪已取�?)
+        showSnackbar("裁剪已取�?)
     }
     
     override fun onCropFailed(msg: String) {
@@ -741,7 +741,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     }
     
     /**
-     * 显示性能测试对话�?     */
+     * 显示性能测试对话�?     */
     private fun showPerformanceTestDialog() {
         val options = arrayOf(
             "测试优化后的性能",
@@ -756,7 +756,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
                 when (which) {
                     0 -> {
                         isPerformanceTestMode = true
-                        showSnackbar("已进入性能测试模式，请选择一张图�?)
+                        showSnackbar("已进入性能测试模式，请选择一张图�?)
                         // 打开相册
                         val intent = Intent().apply {
                             type = "image/*"
@@ -766,7 +766,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
                     }
                     1 -> {
                         isPerformanceTestMode = true
-                        showSnackbar("已进入对比测试模式，请选择一张图�?)
+                        showSnackbar("已进入对比测试模式，请选择一张图�?)
                         val intent = Intent().apply {
                             type = "image/*"
                             action = Intent.ACTION_GET_CONTENT
@@ -778,7 +778,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
                     }
                     3 -> {
                         PerformanceTestHelper.clearResults()
-                        showSnackbar("测试记录已清�?)
+                        showSnackbar("测试记录已清�?)
                     }
                 }
             }
@@ -799,7 +799,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
                     PerformanceTestHelper.testOptimizedLoad(this@EditImageActivity, uri)
                 }
                 
-                // 等待一下，让内存稳�?                kotlinx.coroutines.delay(500)
+                // 等待一下，让内存稳�?                kotlinx.coroutines.delay(500)
                 
                 // 测试优化前的性能（用于对比）
                 val unoptimizedResult = withContext(Dispatchers.IO) {
@@ -840,7 +840,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
         sb.append("加载时间: ${optimized.loadTime} ms\n")
         sb.append("内存使用: ${formatSize(optimized.memoryUsed)}\n")
         sb.append("图片尺寸: ${optimized.loadedWidth} x ${optimized.loadedHeight}\n")
-        sb.append("采样�? ${optimized.sampleSize}\n")
+        sb.append("采样�? ${optimized.sampleSize}\n")
         sb.append("Bitmap配置: ${optimized.bitmapConfig}\n\n")
         
         if (unoptimized != null) {
@@ -848,7 +848,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
             sb.append("加载时间: ${unoptimized.loadTime} ms\n")
             sb.append("内存使用: ${formatSize(unoptimized.memoryUsed)}\n")
             sb.append("图片尺寸: ${unoptimized.loadedWidth} x ${unoptimized.loadedHeight}\n")
-            sb.append("采样�? ${unoptimized.sampleSize}\n")
+            sb.append("采样�? ${unoptimized.sampleSize}\n")
             sb.append("Bitmap配置: ${unoptimized.bitmapConfig}\n\n")
             
             val timeImprovement = ((unoptimized.loadTime - optimized.loadTime).toDouble() / unoptimized.loadTime * 100).toInt()
@@ -886,7 +886,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     }
     
     /**
-     * 格式化文件大�?     */
+     * 格式化文件大�?     */
     private fun formatSize(bytes: Long): String {
         if (bytes < 1024) return "${bytes} B"
         if (bytes < 1024 * 1024) return "${bytes / 1024} KB"
